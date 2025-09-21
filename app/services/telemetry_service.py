@@ -16,6 +16,9 @@ class TelemetryService:
     
     def log_event(self, event: TelemetryEvent) -> TelemetryEvent:
         """Log a telemetry event."""
+        from datetime import datetime
+        timestamp = datetime.fromisoformat(event.timestamp) if isinstance(event.timestamp, str) else event.timestamp
+        
         event_model = TelemetryEventModel(
             id=str(event.id) if hasattr(event, 'id') else None,
             event_type=event.event_type,
@@ -24,7 +27,7 @@ class TelemetryService:
             world_id=event.world_id,
             experience_id=event.experience_id,
             data=event.data,
-            timestamp=event.timestamp
+            timestamp=timestamp
         )
         
         self.db.add(event_model)

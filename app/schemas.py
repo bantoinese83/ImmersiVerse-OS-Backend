@@ -146,7 +146,7 @@ class TelemetryEvent(BaseModel):
     world_id: Optional[str] = Field(None, description="World ID if applicable")
     experience_id: Optional[str] = Field(None, description="Experience ID if applicable")
     data: Dict[str, Any] = Field(default_factory=dict, description="Event-specific data")
-    timestamp: datetime = Field(default_factory=datetime.utcnow, description="Event timestamp")
+    timestamp: str = Field(default_factory=lambda: datetime.utcnow().isoformat(), description="Event timestamp")
 
 
 class UserSession(BaseModel):

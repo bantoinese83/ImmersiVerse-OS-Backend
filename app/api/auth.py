@@ -30,7 +30,7 @@ async def create_session(
     """
     try:
         user_id = request.get("user_id")
-        if not user_id or len(user_id.strip()) == 0:
+        if not user_id or len(str(user_id).strip()) == 0:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="User ID is required"
@@ -114,6 +114,12 @@ async def validate_session(
     This endpoint checks if a session token is valid and returns user information.
     """
     try:
+        if not authorization:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Authorization header required"
+            )
+        
         # Extract token from authorization header
         if not authorization.startswith("Bearer "):
             raise HTTPException(

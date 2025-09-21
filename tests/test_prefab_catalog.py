@@ -68,7 +68,7 @@ def test_get_prefab_by_id_not_found(client, auth_headers):
 
 def test_search_prefabs(client, auth_headers):
     """Test searching prefabs."""
-    response = client.get("/api/v1/prefab-catalog/search?q=castle", headers=auth_headers)
+    response = client.get("/api/v1/prefab-catalog/search/?q=castle", headers=auth_headers)
     
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
@@ -79,7 +79,7 @@ def test_search_prefabs(client, auth_headers):
 
 def test_search_prefabs_with_type_filter(client, auth_headers):
     """Test searching prefabs with type filter."""
-    response = client.get("/api/v1/prefab-catalog/search?q=tree&prefab_type=environment", headers=auth_headers)
+    response = client.get("/api/v1/prefab-catalog/search/?q=tree&prefab_type=environment", headers=auth_headers)
     
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
@@ -91,7 +91,7 @@ def test_search_prefabs_with_type_filter(client, auth_headers):
 
 def test_search_prefabs_empty_query(client, auth_headers):
     """Test searching with empty query."""
-    response = client.get("/api/v1/prefab-catalog/search?q=", headers=auth_headers)
+    response = client.get("/api/v1/prefab-catalog/search/?q=", headers=auth_headers)
     
     assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
 

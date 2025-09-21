@@ -98,6 +98,5 @@ def sample_telemetry_event():
         user_id="test_user",
         session_id="test_session",
         world_id="test_world",
-        data={"action": "enter", "timestamp": datetime.utcnow().isoformat()},
-        timestamp=datetime.utcnow()
+        data={"action": "enter", "timestamp": datetime.utcnow().isoformat()}
     )
